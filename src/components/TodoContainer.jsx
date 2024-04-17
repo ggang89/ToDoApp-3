@@ -1,11 +1,10 @@
 import { useState } from "react";
 import TodoList from "./TodoList";
+import { v4 as uuidv4 } from "uuid";
 
 export default function TodoContainer() {
-  const [todo, setTodo] = useState({
-    todoTitle: "todoApp 만들기",
-    isEditing: false,
-  });
+  const [addTodo, setAddTodo] = useState("");
+
   //map함수를 사용하려면 배열이 필요하다
   //미리 안 정해놓고 그냥 추가 하려면?
   const [todoList, setTodoList] = useState([
@@ -16,6 +15,20 @@ export default function TodoContainer() {
     },
     { id: "id2", todoTitle: "REACT 공식문서 공부", isEditing: false },
   ]);
+
+  const addText = () => {
+    const newArr = {
+      id: uuidv4(),
+      todoTitle: addTodo,
+      isEditing: false,
+    };
+    setTodoList([...todoList, newArr]);
+    //모르겠어...
+  };
+  const handleAddText = (e) => {
+    setAddTodo(e.target.value);
+  };
+
   const edit = (id) => {
     const newArr = todoList.map((t) => {
       if (id === t.id) {
@@ -59,9 +72,11 @@ export default function TodoContainer() {
           id="todo"
           type="text"
           size="50"
+          value={addTodo}
           placeholder="Add Todo..."
+          onChange={handleAddText}
         ></input>
-        <button>추가</button>
+        <button onClick={addText}>추가</button>
       </div>
 
       <ul className="todolistBox">
@@ -75,12 +90,6 @@ export default function TodoContainer() {
             handleText={(e) => handleTextInList(e, t.id)}
           />
         ))}
-
-        <li className="todolist">
-          <p>{todo.todoTitle}</p>
-          <button>수정</button>
-          <button>삭제</button>
-        </li>
       </ul>
     </>
   );
