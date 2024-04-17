@@ -10,12 +10,18 @@ function App() {
     //수정 버튼을 누르면, input창이 뜨고 삭제버튼이 사라진다
     //다시 수정버튼을 누르면 저장된다.
     ///=>변수를 객체로 변형해줘야 isEdting을 추가할 수 있다
+    setTodo({ ...todo, isEditing: !todo.isEditing });
+  };
+  const handleText = (e) => {
+    setTodo({ ...todo, todoTitle: e.target.value });
+    console.log(e.target.value);
+    //e.target.value인지 어디서 확인??
   };
   return (
     <div className="wrap">
       <h1 className="title">To Do App 3</h1>
       <div className="addTodo">
-        <label for="todo">NEW ToDo </label>
+        <label htmlFor="todo">NEW ToDo </label>
         <input
           id="todo"
           type="text"
@@ -27,9 +33,23 @@ function App() {
 
       <ul className="todolistBox">
         <li className="todolist">
-          <p>{todo.todoTitle}</p>
-          <button onClick={edit}>수정</button>
-          <button>삭제</button>
+          {todo.isEditing ? (
+            <>
+              <input
+                value={todo.todoTitle}
+                type="text"
+                size={50}
+                onChange={handleText}
+              ></input>
+              <button onClick={edit}>저장</button>
+            </>
+          ) : (
+            <>
+              <p>{todo.todoTitle}</p>
+              <button onClick={edit}>수정</button>
+              <button>삭제</button>
+            </>
+          )}
         </li>
         <li className="todolist">
           <p>{todo.todoTitle}</p>
