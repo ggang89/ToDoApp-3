@@ -31,6 +31,16 @@ export default function TodoContainer() {
     console.log(e.target.value);
     //e.target.value인지 어디서 확인??
   };
+  const handleTextInList = (e, id) => {
+    const newText = todoList.map((t) => {
+      if (id === t.id) {
+        return { ...t, todoTitle: e.target.value };
+      } else {
+        return t;
+      }
+    });
+    setTodoList(newText);
+  };
   return (
     <>
       <div className="addTodo">
@@ -51,7 +61,7 @@ export default function TodoContainer() {
             isEditing={t.isEditing}
             todoTitle={t.todoTitle}
             edit={() => edit(t.id)}
-            handleText={handleText}
+            handleText={(e) => handleTextInList(e, t.id)}
           />
         ))}
 
