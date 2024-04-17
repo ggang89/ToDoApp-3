@@ -7,6 +7,7 @@ export default function TodoContainer() {
     isEditing: false,
   });
   //map함수를 사용하려면 배열이 필요하다
+  //미리 안 정해놓고 그냥 추가 하려면?
   const [todoList, setTodoList] = useState([
     {
       id: "id1",
@@ -15,8 +16,15 @@ export default function TodoContainer() {
     },
     { id: "id2", todoTitle: "REACT 공식문서 공부", isEditing: false },
   ]);
-  const edit = () => {
-    setTodo({ ...todo, isEditing: !todo.isEditing });
+  const edit = (id) => {
+    const newArr = todoList.map((t) => {
+      if (id === t.id) {
+        return { ...t, isEditing: !t.isEditing };
+      } else {
+        return t;
+      }
+    });
+    setTodoList(newArr);
   };
   const handleText = (e) => {
     setTodo({ ...todo, todoTitle: e.target.value });
@@ -42,7 +50,7 @@ export default function TodoContainer() {
             key={t.id}
             isEditing={t.isEditing}
             todoTitle={t.todoTitle}
-            edit={edit}
+            edit={() => edit(t.id)}
             handleText={handleText}
           />
         ))}
