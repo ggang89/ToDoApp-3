@@ -6,10 +6,16 @@ export default function TodoContainer() {
     todoTitle: "todoApp 만들기",
     isEditing: false,
   });
+  //map함수를 사용하려면 배열이 필요하다
+  const [todoList, setTodoList] = useState([
+    {
+      id: "id1",
+      todoTitle: "Todo App 만들기",
+      isEditing: false,
+    },
+    { id: "id2", todoTitle: "REACT 공식문서 공부", isEditing: false },
+  ]);
   const edit = () => {
-    //수정 버튼을 누르면, input창이 뜨고 삭제버튼이 사라진다
-    //다시 수정버튼을 누르면 저장된다.
-    ///=>변수를 객체로 변형해줘야 isEdting을 추가할 수 있다
     setTodo({ ...todo, isEditing: !todo.isEditing });
   };
   const handleText = (e) => {
@@ -31,12 +37,16 @@ export default function TodoContainer() {
       </div>
 
       <ul className="todolistBox">
-        <TodoList
-          isEditing={todo.isEditing}
-          todoTitle={todo.todoTitle}
-          edit={edit}
-          handleText={handleText}
-        />
+        {todoList.map((t) => (
+          <TodoList
+            key={t.id}
+            isEditing={t.isEditing}
+            todoTitle={t.todoTitle}
+            edit={edit}
+            handleText={handleText}
+          />
+        ))}
+
         <li className="todolist">
           <p>{todo.todoTitle}</p>
           <button>수정</button>
