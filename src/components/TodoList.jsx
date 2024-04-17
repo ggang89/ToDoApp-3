@@ -1,4 +1,4 @@
-export default function TodoList({ isEditing, todoTitle, edit, handleText }) {
+export default function TodoList({ isEditing, todoTitle, edit, del, handleText }) {
   return (
     <>
       <li className="todolist">
@@ -16,7 +16,7 @@ export default function TodoList({ isEditing, todoTitle, edit, handleText }) {
           <>
             <p>{todoTitle}</p>
             <button onClick={edit}>수정</button>
-            <button>삭제</button>
+            <button onClick={del}> 삭제</button>
           </>
         )}
       </li>

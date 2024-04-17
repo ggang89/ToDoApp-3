@@ -26,11 +26,21 @@ export default function TodoContainer() {
     });
     setTodoList(newArr);
   };
-  const handleText = (e) => {
-    setTodo({ ...todo, todoTitle: e.target.value });
-    console.log(e.target.value);
-    //e.target.value인지 어디서 확인??
+  const del = (id) => {
+    const newList = todoList.map((t) => {
+      if (id === t.id) {
+        return { ...!t, isEditing: t.isEditing };
+      } else {
+        return t;
+      }
+    });
+    setTodoList(newList);
   };
+  // const handleText = (e) => {
+  //   setTodo({ ...todo, todoTitle: e.target.value });
+  //   console.log(e.target.value);
+  //   //e.target.value인지 어디서 확인??
+  // };
   const handleTextInList = (e, id) => {
     const newText = todoList.map((t) => {
       if (id === t.id) {
@@ -61,6 +71,7 @@ export default function TodoContainer() {
             isEditing={t.isEditing}
             todoTitle={t.todoTitle}
             edit={() => edit(t.id)}
+            del={() => del(t.id)}
             handleText={(e) => handleTextInList(e, t.id)}
           />
         ))}
