@@ -22,6 +22,8 @@
   justify-content: center;
   background: #fff;
   padding: 5px;
+  box-sizing: border-box;
+  height: 40px;
   border-bottom: 3px solid rgb(61, 29, 222);
 }
 .todolistBox {
@@ -30,16 +32,16 @@
 }
 .todolist {
   display: flex;
-  justify-content: ;
+
 }
 .btn {
   flex: 1;
-  margin-left: 3px;
+  margin: 3px;
+  /* margin-bottom: 2px; */
   display: inline-block;
   /* inline-block하니까 글자 가운데 정렬됨 */
   /* justify-content: center; */
-  align-items: center;
-  /* height: 5px; */
+  /* align-items: center; */
   box-sizing: border-box;
   border-radius: 10px;
   border: none;
