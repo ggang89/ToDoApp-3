@@ -1,6 +1,7 @@
 import { useState } from "react";
 import TodoList from "./TodoList";
 import { v4 as uuidv4 } from "uuid";
+import "./Container.css";
 
 export default function TodoContainer() {
   const [addTodo, setAddTodo] = useState("");
@@ -67,16 +68,16 @@ export default function TodoContainer() {
   return (
     <>
       <div className="addTodo">
-        <label htmlFor="todo">NEW ToDo </label>
+        <label htmlFor="todo" className="label">NEW ToDo </label>
         <input
           id="todo"
           type="text"
-          size="50"
+          size="48"
           value={addTodo}
           placeholder="Add Todo..."
           onChange={handleAddText}
         ></input>
-        <button onClick={addText}>추가</button>
+        <button onClick={addText} className="btn">추가</button>
       </div>
 
       <ul className="todolistBox">

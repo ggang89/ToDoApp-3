@@ -14,9 +14,9 @@ export default function TodoList({ isEditing, todoTitle, edit, del, handleText }
           </>
         ) : (
           <>
-            <p>{todoTitle}</p>
-            <button onClick={edit}>수정</button>
-            <button onClick={del}> 삭제</button>
+            <p className="todoList">{todoTitle}</p>
+            <button onClick={edit} className="btn">수정</button>
+            <button onClick={del}className="btn"> 삭제</button>
           </>
         )}
       </li>
