@@ -2,32 +2,29 @@ import { useState } from "react";
 import TodoList from "./TodoList";
 import { v4 as uuidv4 } from "uuid";
 
-
 export default function TodoContainer() {
   const [addTodo, setAddTodo] = useState("");
-
+ 
   //map함수를 사용하려면 배열이 필요하다
   //미리 안 정해놓고 그냥 추가 하려면?
-  const [todoList, setTodoList] = useState([
-    {
-      id: "id1",
-      todoTitle: "Todo App 만들기",
-      isEditing: false,
-    },
-    { id: "id2", todoTitle: "REACT 공식문서 공부", isEditing: false },
-  ]);
+  const [todoList, setTodoList] = useState([ ]);
 
+  //새로운 값 추가 버튼
   const addText = () => {
     const newArr = {
       id: uuidv4(),
       todoTitle: addTodo,
       isEditing: false,
     };
-    setTodoList([...todoList, newArr]);
-    //모르겠어...
+    
+    setTodoList([newArr,...todoList ]);
+    setAddTodo("");
+    //새로운 ToDo넣어주고 input창 비우기
   };
   const handleAddText = (e) => {
+   
     setAddTodo(e.target.value);
+    
   };
 
   const edit = (id) => {
@@ -41,12 +38,8 @@ export default function TodoContainer() {
     setTodoList(newArr);
   };
   const del = (id) => {
-    const newList = todoList.map((t) => {
-      if (id === t.id) {
-        return { ...!t, isEditing: t.isEditing };
-      } else {
-        return t;
-      }
+    const newList = todoList.filter((t) => {
+      return t.id !== id;
     });
     setTodoList(newList);
   };
@@ -57,6 +50,11 @@ export default function TodoContainer() {
   // };
   const handleTextInList = (e, id) => {
     const newText = todoList.map((t) => {
+      // {
+      //   id: "id1",
+      //   todoTitle: "Todo App 만들기",
+      //   isEditing: false,
+      // },
       if (id === t.id) {
         return { ...t, todoTitle: e.target.value };
       } else {
@@ -68,7 +66,9 @@ export default function TodoContainer() {
   return (
     <>
       <div className="addTodo">
-        <label htmlFor="todo" className="label">NEW ToDo </label>
+        <label htmlFor="todo" className="label">
+          NEW ToDo{" "}
+        </label>
         <input
           id="todo"
           type="text"
@@ -77,7 +77,9 @@ export default function TodoContainer() {
           placeholder="Add Todo..."
           onChange={handleAddText}
         ></input>
-        <button onClick={addText} className="btn">추가</button>
+        <button onClick={addText} className="btn">
+          추가
+        </button>
       </div>
 
       <ul className="todolistBox">
